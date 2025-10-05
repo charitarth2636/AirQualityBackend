@@ -1,0 +1,48 @@
+{
+  "info": {
+    "name": "AirQualityBackend",
+    "_postman_id": "a1234bcd-5678-ef90-gh12-ijkl3456mnop",
+    "description": "Test collection for Air Quality Forecast Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Check Server",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/"
+      }
+    },
+    {
+      "name": "Signup",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/auth/signup",
+        "urlencoded": [
+          { "key": "username", "value": "testuser" },
+          { "key": "email", "value": "test@gmail.com" },
+          { "key": "password", "value": "1234" }
+        ]
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/auth/login",
+        "urlencoded": [
+          { "key": "username", "value": "testuser" },
+          { "key": "password", "value": "1234" }
+        ]
+      }
+    },
+    {
+      "name": "Forecast",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/forecast?lat=23.0225&lon=72.5714"
+      }
+    }
+  ],
+  "variable": [{ "key": "baseUrl", "value": "http://127.0.0.1:8000" }]
+}

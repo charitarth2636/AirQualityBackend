@@ -1,12 +1,10 @@
 from fastapi import FastAPI
+from src.models.database import Base, engine
 from src.routes import auth, forecast
-from src.models.database import init_db
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Air Quality Forecast Backend")
-
-@app.on_event("startup")
-async def on_startup():
-    init_db()
 
 @app.get("/")
 async def root():
