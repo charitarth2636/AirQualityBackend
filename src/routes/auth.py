@@ -17,7 +17,7 @@ class UserLogin(BaseModel):
     password: str
 
 @router.post("/signup")
-def signup(user: UserCreate, db: Session = Depends(get_db)):
+async def signup(user: UserCreate, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(User.username == user.username).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="Username already exists")
@@ -29,7 +29,7 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
     return {"message": "User created successfully", "user_id": new_user.id}
 
 @router.post("/login")
-def login(user: UserLogin, db: Session = Depends(get_db)):
+async def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.username == user.username).first()
     if not db_user or not verify_password(user.password, db_user.password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
